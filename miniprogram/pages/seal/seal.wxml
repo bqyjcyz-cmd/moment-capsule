@@ -1,0 +1,150 @@
+<view class="page">
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+
+  <!-- 导航栏 -->
+  <view class="header-bar">
+    <view class="close-btn" bindtap="onCloseTap">
+      <image class="close-icon" src="/images/close-dark.svg" />
+    </view>
+    <view class="header-title-area">
+      <view class="header-time">{{dateTimeDisplay}}</view>
+    </view>
+    <view style="width:64rpx;"></view>
+  </view>
+
+  <!-- 地址栏 -->
+  <view class="location-bar" bindtap="onLocationTap">
+    <image class="loc-icon" src="/images/seal-locate.svg" />
+    <view class="loc-name">{{locationStatus === 'loading' ? '正在定位...' : locationStatus === 'success' ? locationName : locationStatus === 'failed' ? '点击重新定位' : '点击授权定位'}}</view>
+  </view>
+
+  <!-- 可滚动编辑区 — 飞书风格块状布局 -->
+  <scroll-view class="editor-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+
+    <!-- 心情块 -->
+    <view class="block block-mood" bindtap="onEmojiAreaTap">
+      <view class="emoji-circle" style="background:{{selectedMoodColor}};">
+        <text class="emoji-text">{{selectedEmoji}}</text>
+      </view>
+      <view class="mood-tag" wx:if="{{selectedMoodName}}">
+        <text class="mood-tag-text">{{selectedMoodName}}</text>
+      </view>
+    </view>
+
+    <!-- 文本块 -->
+    <view class="block block-text">
+      <view class="block-label">文本</view>
+      <textarea
+        class="text-input"
+        placeholder="写下此刻的感受..."
+        placeholder-class="text-placeholder"
+        value="{{text}}"
+        bindinput="onTextInput"
+        auto-height
+        maxlength="-1"
+      />
+    </view>
+
+    <!-- 照片块（有照片时才展示） -->
+    <view class="block block-photos" wx:if="{{photos.length > 0}}">
+      <view class="block-label">照片 {{photos.length}}/8</view>
+      <view class="photo-grid">
+        <view class="photo-item" wx:for="{{photos}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill" class="photo-thumb" />
+          <view class="photo-delete" data-index="{{index}}" catchtap="onDeletePhoto">✕</view>
+        </view>
+        <view class="photo-add" wx:if="{{photos.length < 8}}" bindtap="onPhotoTap">
+          <text class="photo-add-icon">+</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 录音块 -->
+    <view class="block block-audio" wx:if="{{audioPath}}">
+      <view class="block-label">录音</view>
+      <view class="audio-card">
+        <view class="audio-icon-circle">
+          <text class="audio-icon-text">♪</text>
+        </view>
+        <view class="audio-info">
+          <text class="audio-info-title">环境音</text>
+          <text class="audio-info-duration">{{audioDuration}}s</text>
+        </view>
+        <view class="audio-card-actions">
+          <text class="audio-card-play" catchtap="onPlayAudio">▶</text>
+          <text class="audio-card-delete" catchtap="onDeleteAudio">删除</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 视频块 -->
+    <view class="block block-video" wx:if="{{videoPath}}">
+      <view class="block-label">视频</view>
+      <view class="video-card">
+        <video src="{{videoPath}}" class="video-thumb" object-fit="cover" show-play-btn="{{false}}" controls="{{false}}" />
+        <text class="video-duration">{{videoDuration}}s</text>
+        <view class="video-delete" catchtap="onDeleteVideo">✕</view>
+      </view>
+    </view>
+
+    <view style="height: 240rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部工具栏 -->
+  <view class="bottom-fixed">
+    <view class="toolbar-row">
+      <view class="tool-btn {{showEmojiPanel ? 'tool-btn-active' : ''}}" bindtap="onToggleEmojiPanel">
+        <image class="tool-icon" src="/images/tool-smile.svg" />
+      </view>
+      <view class="tool-btn" bindtap="onPhotoTap">
+        <image class="tool-icon" src="/images/tool-camera.svg" />
+      </view>
+      <view class="tool-btn" bindtap="onAudioTap">
+        <image class="tool-icon" src="/images/tool-mic.svg" />
+      </view>
+    </view>
+
+    <view class="color-row">
+      <view
+        class="color-dot {{selectedColor === item ? 'color-dot-selected' : ''}}"
+        wx:for="{{colorList}}"
+        wx:key="index"
+        style="background:{{item}};"
+        data-color="{{item}}"
+        bindtap="onColorTap"
+      ></view>
+    </view>
+
+    <view class="seal-area safe-bottom">
+      <view class="seal-btn {{canSeal ? '' : 'seal-btn-disabled'}}" bindtap="onSealTap">
+        <text class="seal-btn-text">{{isSealing ? '封存中...' : '封 存'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 表情面板 -->
+  <view class="emoji-panel-mask {{showEmojiPanel ? 'show' : ''}}" bindtap="onToggleEmojiPanel"></view>
+  <view class="emoji-panel {{showEmojiPanel ? 'show' : ''}}">
+    <view class="emoji-panel-title">
+      <text class="emoji-panel-title-text">选择心情</text>
+    </view>
+    <view class="emoji-grid">
+      <view class="emoji-grid-row">
+        <view class="emoji-option" wx:for="{{moodList}}" wx:key="name" wx:if="{{index < 4}}" data-index="{{index}}" bindtap="onMoodSelect">
+          <view class="emoji-option-circle" style="background:{{item.bg}};">
+            <text class="emoji-option-emoji">{{item.emoji}}</text>
+          </view>
+          <text class="emoji-option-label">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="emoji-grid-row">
+        <view class="emoji-option" wx:for="{{moodList}}" wx:key="name" wx:if="{{index >= 4}}" data-index="{{index}}" bindtap="onMoodSelect">
+          <view class="emoji-option-circle" style="background:{{item.bg}};">
+            <text class="emoji-option-emoji">{{item.emoji}}</text>
+          </view>
+          <text class="emoji-option-label">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

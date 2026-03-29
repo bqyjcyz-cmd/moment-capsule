@@ -1,0 +1,36 @@
+<view class="tab-bar safe-bottom">
+  <view class="tab-bar-pill">
+    <!-- 地图 -->
+    <view
+      class="tab-item {{active === 0 ? 'tab-active' : ''}}"
+      data-index="0"
+      bindtap="switchTab"
+    >
+      <image
+        class="tab-icon"
+        src="{{active === 0 ? '/images/tab-map-active.svg' : '/images/tab-map.svg'}}"
+      />
+      <text class="tab-label">地图</text>
+    </view>
+
+    <!-- 封存 -->
+    <view class="tab-item tab-seal" data-index="1" bindtap="switchTab">
+      <view class="seal-circle">
+        <image class="seal-icon" src="/images/tab-plus.svg" />
+      </view>
+    </view>
+
+    <!-- 时间线 -->
+    <view
+      class="tab-item {{active === 2 ? 'tab-active' : ''}}"
+      data-index="2"
+      bindtap="switchTab"
+    >
+      <image
+        class="tab-icon"
+        src="{{active === 2 ? '/images/tab-timer-active.svg' : '/images/tab-timer.svg'}}"
+      />
+      <text class="tab-label">时间线</text>
+    </view>
+  </view>
+</view>

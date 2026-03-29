@@ -1,0 +1,82 @@
+<view class="page">
+  <!-- 状态栏占位 -->
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+
+  <!-- 顶部标题栏（有胶囊时显示） -->
+  <view wx:if="{{!isEmpty}}" class="title-bar">
+    <image class="title-icon" src="/images/title-cloud.svg" />
+    <view class="month-tag">
+      <text class="month-text">{{monthDisplay}}</text>
+    </view>
+    <image class="title-icon" src="/images/title-settings.svg" />
+  </view>
+
+  <!-- 地图 -->
+  <map
+    id="capsuleMap"
+    class="map"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="14"
+    markers="{{markers}}"
+    show-location
+    enable-zoom
+    enable-scroll
+    enable-rotate="{{false}}"
+    bindmarkertap="onMarkerTap"
+    bindtap="onMapTap"
+  >
+    <!-- 空状态 -->
+    <cover-view wx:if="{{isEmpty}}" class="empty-state">
+      <cover-view class="empty-icon-wrap">
+        <cover-image class="empty-icon-img" src="/images/empty-package.svg" />
+      </cover-view>
+      <cover-view class="empty-text">你的胶囊会出现在这里</cover-view>
+    </cover-view>
+  </map>
+
+  <!-- 历史上的今天 -->
+  <view
+    wx:if="{{showTodayHistory}}"
+    class="today-card {{showTodayHistory ? 'show' : ''}}"
+    bindtap="onTodayHistoryTap"
+  >
+    <view class="today-photo">
+      <image
+        wx:if="{{todayHistory.photos && todayHistory.photos.length > 0}}"
+        src="{{todayHistory.photos[0]}}"
+        mode="aspectFill"
+        class="today-photo-img"
+      />
+      <view wx:else class="today-photo-placeholder"></view>
+    </view>
+    <view class="today-text">
+      <text class="today-label">{{todayHistory.relativeDate}}</text>
+      <text class="today-content">你在{{todayHistory.locationName}}封存了一颗胶囊</text>
+    </view>
+  </view>
+
+  <!-- 定位按钮 -->
+  <view class="locate-btn" bindtap="onLocateTap">
+    <image class="locate-icon" src="/images/map-locate.svg" />
+  </view>
+
+  <!-- 预览卡片 -->
+  <view class="preview-card {{showPreview ? 'show' : ''}}" wx:if="{{previewCapsule}}" bindtap="onPreviewTap">
+    <view class="preview-photo">
+      <image
+        wx:if="{{previewCapsule.photos.length > 0}}"
+        src="{{previewCapsule.photos[0]}}"
+        mode="aspectFill"
+        class="preview-photo-img"
+      />
+      <view wx:else class="preview-photo-placeholder"></view>
+    </view>
+    <view class="preview-content">
+      <text class="preview-text">{{previewCapsule.textPreview || ''}}</text>
+      <view class="preview-meta">
+        <text class="preview-meta-text">{{previewCapsule.locationName}} · {{previewCapsule.dateDisplay}}</text>
+      </view>
+    </view>
+  </view>
+</view>

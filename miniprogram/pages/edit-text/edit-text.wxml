@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+
+  <!-- 头部导航栏 -->
+  <view class="header">
+    <text class="header-cancel" bindtap="onCancel">取消</text>
+    <text class="header-title">编辑文字</text>
+    <text class="header-save {{hasChanged ? 'active' : ''}}" bindtap="onSave">保存</text>
+  </view>
+
+  <!-- 编辑区域 -->
+  <view class="edit-area">
+    <textarea
+      class="edit-input"
+      value="{{text}}"
+      bindinput="onTextInput"
+      placeholder="写下此刻的心情..."
+      placeholder-class="edit-placeholder"
+      auto-focus
+      auto-height
+      maxlength="-1"
+    />
+  </view>
+
+  <!-- 位置和日期元信息（只读） -->
+  <view class="meta-info" wx:if="{{location || date}}">
+    <text class="meta-text">📍 {{location}}{{date ? ' · ' + date : ''}}</text>
+  </view>
+</view>

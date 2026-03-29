@@ -1,0 +1,84 @@
+<view class="page" wx:if="{{capsule}}">
+  <!-- 照片背景 swiper — 放在最上层接收触摸 -->
+  <swiper
+    class="photo-swiper"
+    current="{{currentPhotoIndex}}"
+    bindchange="onPhotoSwipe"
+    circular
+    duration="300"
+    wx:if="{{capsule.photos.length > 0}}"
+  >
+    <swiper-item wx:for="{{capsule.photos}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill" class="photo-bg-img" />
+    </swiper-item>
+  </swiper>
+  <view class="photo-bg gradient-bg" wx:else></view>
+
+  <!-- 暗色渐变蒙层 — 不拦截触摸 -->
+  <view class="dark-overlay"></view>
+
+  <!-- 顶部导航 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-btn" bindtap="onBackTap">
+      <image class="nav-btn-icon" src="/images/nav-back-white.svg" />
+    </view>
+    <view class="nav-spacer"></view>
+    <view class="nav-btn" bindtap="onMenuTap">
+      <text class="nav-dots">···</text>
+    </view>
+  </view>
+
+  <!-- 内容信息区 — 距底部留出空间给图片指示器 -->
+  <view class="info-panel" style="bottom: {{capsule.photos.length > 1 ? '120' : '60'}}rpx; padding-bottom: {{safeBottom}}px;">
+    <!-- 文字（可滚动） -->
+    <scroll-view
+      class="text-scroll"
+      scroll-y
+      wx:if="{{capsule.text}}"
+      style="max-height:{{scrollMaxHeight}}px;"
+    >
+      <text class="review-text">{{capsule.text}}</text>
+    </scroll-view>
+
+    <!-- 信息条 -->
+    <view class="info-bar">
+      <view class="info-mood" wx:if="{{capsule.emoji}}">
+        <text class="info-mood-emoji">{{capsule.emoji}}</text>
+        <text class="info-mood-name">{{capsule.mood}}</text>
+      </view>
+      <text class="info-location" wx:if="{{capsule.locationName}}">{{capsule.locationName}}</text>
+      <text class="info-date">{{capsule.formattedDate}}</text>
+
+      <!-- 录音播放 -->
+      <view class="info-audio" wx:if="{{capsule.audioPath}}" catchtap="onToggleAudio">
+        <text class="info-audio-icon">{{audioPlaying ? '⏸' : '▶'}}</text>
+        <text class="info-audio-label">环境音</text>
+        <view class="info-audio-wave" wx:if="{{audioPlaying}}">
+          <view class="wave-bar-sm" wx:for="{{5}}" wx:key="index"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片切换指示器 — 屏幕最底部 -->
+  <view class="photo-dots-bar" wx:if="{{capsule.photos.length > 1}}" style="padding-bottom: {{safeBottom}}px;">
+    <view class="photo-dots">
+      <view
+        wx:for="{{capsule.photos}}"
+        wx:key="index"
+        class="dot {{currentPhotoIndex === index ? 'dot-active' : ''}}"
+      ></view>
+    </view>
+    <text class="photo-counter">{{currentPhotoIndex + 1}} / {{capsule.photos.length}}</text>
+  </view>
+
+  <!-- 操作菜单 -->
+  <view class="menu-overlay {{showMenu ? 'show' : ''}}" wx:if="{{showMenu}}" bindtap="onMenuClose"></view>
+  <view class="menu-sheet {{showMenu ? 'show' : ''}}" wx:if="{{showMenu}}" catchtap="">
+    <view class="menu-handle"></view>
+    <view class="menu-item" bindtap="onEditTap"><text>编辑文字</text></view>
+    <view class="menu-item menu-item-danger" bindtap="onDeleteTap"><text>删除胶囊</text></view>
+    <view class="menu-divider"></view>
+    <view class="menu-item menu-item-cancel" bindtap="onMenuClose"><text>取消</text></view>
+  </view>
+</view>

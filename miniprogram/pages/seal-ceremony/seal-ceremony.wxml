@@ -1,0 +1,41 @@
+<view class="page">
+  <!-- 便签（收缩动画） -->
+  <view class="sticky-note {{phase >= 1 ? 'shrink' : ''}}" style="opacity:{{phase >= 2 ? 0 : 1}};">
+    <view class="tape"></view>
+    <text class="note-text">{{text}}</text>
+    <text class="note-date">{{dateLocation}}</text>
+    <view class="ruled-line" wx:for="{{4}}" wx:key="index" style="top:{{130 + index * 34}}rpx;"></view>
+  </view>
+
+  <!-- 幽灵便签 -->
+  <view class="ghost-note ghost-1" style="opacity:{{phase >= 1 ? 0 : 0.25}};"></view>
+  <view class="ghost-note ghost-2" style="opacity:{{phase >= 1 ? 0 : 0.1}};"></view>
+
+  <!-- 上升轨迹粒子 -->
+  <view class="trail" wx:for="{{4}}" wx:key="index"
+    style="opacity:{{phase >= 1 ? 0.6 : 0}};top:{{770 - index * 30}}rpx;width:{{12 - index * 2}}rpx;height:{{12 - index * 2}}rpx;">
+  </view>
+
+  <!-- 胶囊体 -->
+  <view class="capsule-area {{phase >= 2 ? 'float-up' : ''}}">
+    <view class="capsule-glow"></view>
+    <view class="capsule-body">
+      <view class="capsule-slot"></view>
+      <view class="capsule-center"></view>
+    </view>
+  </view>
+
+  <!-- 光粒子 -->
+  <view class="spark spark-1" style="opacity:{{phase >= 1 ? 1 : 0}};"></view>
+  <view class="spark spark-2" style="opacity:{{phase >= 1 ? 1 : 0}};"></view>
+  <view class="spark spark-3" style="opacity:{{phase >= 1 ? 1 : 0}};"></view>
+  <view class="spark spark-4" style="opacity:{{phase >= 1 ? 1 : 0}};"></view>
+
+  <!-- 状态文字 -->
+  <view class="status-area" style="opacity:{{phase >= 1 ? 1 : 0}};">
+    <text class="status-text">已封存</text>
+    <text class="status-sub">便签正在折叠收入胶囊...</text>
+  </view>
+
+  <text class="status-hint" style="opacity:{{phase >= 2 ? 1 : 0}};">胶囊将飘入你的地图</text>
+</view>

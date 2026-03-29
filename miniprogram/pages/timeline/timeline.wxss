@@ -1,0 +1,214 @@
+.page {
+  min-height: 100vh;
+  background: #ECEAE2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标题行 */
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 48rpx 32rpx;
+}
+
+.title {
+  font-size: 44rpx;
+  font-weight: 300;
+  color: #3A3632;
+  letter-spacing: -1rpx;
+}
+
+.year-display { display: flex; align-items: center; gap: 12rpx; }
+.year-text { font-size: 28rpx; font-weight: 600; color: #3A3632; }
+.year-dot { font-size: 28rpx; color: #A09A92; }
+.month-label { font-size: 28rpx; font-weight: 600; color: #8BA676; }
+
+/* 月份选择器 */
+.month-selector {
+  white-space: nowrap;
+  padding: 0 40rpx 24rpx;
+  flex-shrink: 0;
+}
+
+.month-inner { display: inline-flex; gap: 16rpx; }
+
+.month-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64rpx;
+  padding: 0 20rpx;
+  border-radius: 32rpx;
+  flex-shrink: 0;
+}
+
+.month-pill-active { background: rgba(139, 166, 118, 0.15); }
+
+.month-pill-text { font-size: 26rpx; font-weight: 500; color: #A09A92; }
+.month-pill-text-active { font-weight: 600; color: #5C7A4A; }
+
+/* 时间线滚动区 */
+.timeline-scroll { flex: 1; }
+.timeline-list { padding: 16rpx 40rpx 0; }
+
+/* 月份头 */
+.month-head {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0 24rpx 16rpx;
+}
+
+.month-dot { width: 16rpx; height: 16rpx; border-radius: 8rpx; }
+.month-head-text { font-size: 26rpx; font-weight: 600; letter-spacing: 1rpx; }
+.month-line { flex: 1; height: 1rpx; background: rgba(213, 208, 200, 0.5); }
+
+/* 时间线行 */
+.timeline-row { display: flex; margin-bottom: 0; }
+
+/* 时间轴 */
+.tl-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64rpx;
+  flex-shrink: 0;
+}
+
+.tl-line { width: 3rpx; height: 24rpx; background: #D5D0C8; }
+.tl-line-bottom { flex: 1; }
+
+.tl-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  background: #FFFFFF;
+  border: 4rpx solid #8BA676;
+  flex-shrink: 0;
+}
+
+/* 卡片区 */
+.tl-card-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  padding-bottom: 32rpx;
+}
+
+.tl-date-label {
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tl-card {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 24rpx;
+  background: #F6F4EE;
+  border: 1rpx solid #D5D0C8;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.tl-card-photo {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+  border: 1rpx solid #D5D0C8;
+}
+
+.tl-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  overflow: hidden;
+}
+
+.tl-card-text {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #3A3632;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tl-card-meta { font-size: 20rpx; color: #A09A92; }
+
+/* 淡出结尾 */
+.fade-end {
+  display: flex;
+  align-items: flex-start;
+  opacity: 0.4;
+  padding-bottom: 32rpx;
+}
+
+.fade-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.fade-dot { background: #D5D0C8; border-radius: 50%; }
+.fade-text { font-size: 22rpx; color: #B8A898; font-style: italic; margin-left: 8rpx; margin-top: 4rpx; }
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 28rpx;
+  padding-bottom: 200rpx;
+}
+
+.empty-icon-wrap {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 56rpx;
+  border: 1rpx solid rgba(213, 208, 200, 0.38);
+  background: rgba(246, 244, 238, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon-img { width: 48rpx; height: 48rpx; opacity: 0.4; }
+.empty-text { font-size: 26rpx; color: #A09A92; }
+
+/* 骨架屏 */
+.skeleton { padding: 0 40rpx; margin-top: 32rpx; }
+
+.skeleton-card {
+  display: flex; align-items: center; gap: 24rpx;
+  padding: 24rpx; margin-bottom: 20rpx;
+  border-radius: 16rpx; background: #F6F4EE;
+  border: 1rpx solid #D5D0C8;
+}
+
+.skeleton-photo {
+  width: 100rpx; height: 100rpx; border-radius: 8rpx;
+  background: #D5D0C8; flex-shrink: 0;
+}
+
+.skeleton-content { flex: 1; display: flex; flex-direction: column; gap: 16rpx; }
+.skeleton-line { height: 20rpx; border-radius: 4rpx; background: #D5D0C8; }
+.skeleton-line-long { width: 80%; }
+.skeleton-line-short { width: 50%; }
+
+.pulse { animation: pulse 1.5s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}

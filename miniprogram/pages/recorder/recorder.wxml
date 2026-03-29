@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
+
+  <!-- 头部 -->
+  <view class="header">
+    <text class="header-cancel" bindtap="onCancel">取消</text>
+    <text class="header-title">录音</text>
+    <view style="width:80rpx;"></view>
+  </view>
+
+  <!-- 录音内容区 -->
+  <view class="rec-content">
+    <text class="timer-label">{{timerDisplay}}</text>
+
+    <view class="waveform-area">
+      <view
+        class="wave-bar {{index < activeWaveBars ? 'wave-bar-active' : ''}}"
+        wx:for="{{25}}"
+        wx:key="index"
+        style="height:{{index < activeWaveBars ? (waveHeights[index] || 16) : 16}}rpx;"
+      ></view>
+    </view>
+
+    <view class="rec-status" wx:if="{{isRecording}}">
+      <view class="rec-dot"></view>
+      <text class="rec-label">正在录音...</text>
+    </view>
+    <text class="rec-label" wx:elif="{{audioPath}}">录音完成 · {{recordTime}}秒</text>
+    <text class="rec-label" wx:else>点击下方按钮开始录音</text>
+  </view>
+
+  <!-- 底部控制 -->
+  <view class="bottom-controls" wx:if="{{!audioPath}}">
+    <view class="ctrl-btn {{audioPath ? '' : 'disabled'}}" bindtap="onDelete">
+      <image class="ctrl-icon" src="/images/rec-trash.svg" />
+    </view>
+
+    <view class="stop-btn {{isRecording ? 'recording' : ''}}" bindtap="onRecordToggle">
+      <view wx:if="{{isRecording}}" class="stop-square"></view>
+      <view wx:else class="record-circle"></view>
+    </view>
+
+    <view class="ctrl-btn {{isRecording ? '' : 'disabled'}}" bindtap="onPause">
+      <image class="ctrl-icon" src="/images/rec-pause.svg" />
+    </view>
+  </view>
+
+  <!-- 录音完成 — 确认区域 -->
+  <view class="confirm-area safe-bottom" wx:if="{{audioPath}}">
+    <view class="confirm-preview">
+      <view class="confirm-icon">♪</view>
+      <view class="confirm-info">
+        <text class="confirm-title">环境音录制完成</text>
+        <text class="confirm-duration">时长 {{recordTime}} 秒</text>
+      </view>
+      <view class="confirm-play" bindtap="onPlayPreview">▶</view>
+    </view>
+    <view class="confirm-actions">
+      <view class="confirm-btn-retry" bindtap="onRetry">
+        <text class="confirm-btn-retry-text">重新录制</text>
+      </view>
+      <view class="confirm-btn-use" bindtap="onUse">
+        <text class="confirm-btn-use-text">确认使用</text>
+      </view>
+    </view>
+  </view>
+</view>

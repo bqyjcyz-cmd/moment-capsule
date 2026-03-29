@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/map/map",
+    "pages/seal/seal",
+    "pages/timeline/timeline",
+    "pages/review/review",
+    "pages/onboarding/onboarding",
+    "pages/edit-text/edit-text",
+    "pages/seal-ceremony/seal-ceremony",
+    "pages/camera/camera",
+    "pages/recorder/recorder"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#ECEAE2",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#9A9A9A",
+    "selectedColor": "#F5A623",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/map/map",
+        "text": "地图"
+      },
+      {
+        "pagePath": "pages/timeline/timeline",
+        "text": "时间线"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json",
+  "cloud": true,
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置将用于记住封存胶囊的地点"
+    },
+    "scope.camera": {
+      "desc": "用于拍摄此刻的画面"
+    },
+    "scope.record": {
+      "desc": "用于录制此刻的环境声音"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "__usePrivacyCheck__": true
+}

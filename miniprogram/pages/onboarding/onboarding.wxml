@@ -1,0 +1,130 @@
+<view class="page">
+  <swiper class="swiper" current="{{currentPage}}" bindchange="onSwiperChange" duration="300">
+    <!-- 页面 1：产品理念 -->
+    <swiper-item>
+      <view class="slide">
+        <view class="slide-content">
+          <view class="icon-circle">
+            <image class="icon-img" src="/images/ob-diamond.svg" />
+          </view>
+          <text class="slide-title">此刻胶囊</text>
+          <view class="slide-desc">
+            <text class="desc-line">在有感触的时刻封存此刻</text>
+            <text class="desc-line">在未来的某天重新遇见</text>
+          </view>
+        </view>
+        <view class="slide-bottom">
+          <view class="ob-btn" bindtap="onContinue">
+            <text class="ob-btn-text">继续</text>
+          </view>
+          <view class="dots">
+            <view class="dot dot-active"></view>
+            <view class="dot"></view>
+            <view class="dot"></view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 页面 2：不是日记 -->
+    <swiper-item>
+      <view class="slide">
+        <view class="slide-content">
+          <view class="icon-circle">
+            <image class="icon-img" src="/images/ob-calendar.svg" />
+          </view>
+          <text class="slide-title">这不是日记</text>
+          <view class="slide-desc">
+            <text class="desc-line">没有每天要写的压力</text>
+            <text class="desc-line">有感触的时候再来就好</text>
+          </view>
+        </view>
+        <view class="slide-bottom">
+          <view class="ob-btn" bindtap="onContinue">
+            <text class="ob-btn-text">继续</text>
+          </view>
+          <view class="dots">
+            <view class="dot"></view>
+            <view class="dot dot-active"></view>
+            <view class="dot"></view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 页面 3：权限授权 -->
+    <swiper-item>
+      <view class="slide slide-permissions">
+        <view class="perm-header">
+          <view class="perm-icon-circle">
+            <image class="perm-icon-img" src="/images/ob-shield.svg" />
+          </view>
+          <text class="perm-title">为了记住你的位置和此刻</text>
+          <text class="perm-subtitle">需要获取一些权限</text>
+        </view>
+
+        <view class="perm-cards">
+          <view class="perm-card">
+            <image class="perm-card-icon" src="/images/ob-map-pin.svg" />
+            <view class="perm-card-text">
+              <text class="perm-card-name">位置权限</text>
+              <text class="perm-card-desc">记住你封存此刻的地方</text>
+            </view>
+            <view
+              class="perm-card-btn {{permissions.location === 'granted' ? 'granted' : permissions.location === 'denied' ? 'denied' : 'highlight'}}"
+              bindtap="{{permissions.location === 'denied' ? 'onGoSettings' : 'onAuthLocation'}}"
+            >
+              <text wx:if="{{permissions.location === 'granted'}}">已授权</text>
+              <text wx:elif="{{permissions.location === 'denied'}}">去设置</text>
+              <text wx:else>授权</text>
+            </view>
+          </view>
+
+          <view class="perm-card">
+            <image class="perm-card-icon" src="/images/ob-camera.svg" />
+            <view class="perm-card-text">
+              <text class="perm-card-name">相机权限</text>
+              <text class="perm-card-desc">拍下此刻的画面</text>
+            </view>
+            <view
+              class="perm-card-btn {{permissions.camera === 'granted' ? 'granted' : permissions.camera === 'denied' ? 'denied' : ''}}"
+              bindtap="{{permissions.camera === 'denied' ? 'onGoSettings' : 'onAuthCamera'}}"
+            >
+              <text wx:if="{{permissions.camera === 'granted'}}">已授权</text>
+              <text wx:elif="{{permissions.camera === 'denied'}}">去设置</text>
+              <text wx:else>授权</text>
+            </view>
+          </view>
+
+          <view class="perm-card">
+            <image class="perm-card-icon" src="/images/ob-mic.svg" />
+            <view class="perm-card-text">
+              <text class="perm-card-name">麦克风权限</text>
+              <text class="perm-card-desc">录下此刻的声音</text>
+            </view>
+            <view
+              class="perm-card-btn {{permissions.record === 'granted' ? 'granted' : permissions.record === 'denied' ? 'denied' : ''}}"
+              bindtap="{{permissions.record === 'denied' ? 'onGoSettings' : 'onAuthRecord'}}"
+            >
+              <text wx:if="{{permissions.record === 'granted'}}">已授权</text>
+              <text wx:elif="{{permissions.record === 'denied'}}">去设置</text>
+              <text wx:else>授权</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="slide-bottom">
+          <view class="ob-btn" bindtap="onEnter">
+            <text class="ob-btn-text">进入此刻胶囊</text>
+          </view>
+          <text class="skip-text" bindtap="onSkip">暂时跳过，之后也可以授权</text>
+          <view class="dots">
+            <view class="dot"></view>
+            <view class="dot"></view>
+            <view class="dot dot-active"></view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

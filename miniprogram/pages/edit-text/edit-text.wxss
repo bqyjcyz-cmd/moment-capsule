@@ -1,0 +1,75 @@
+.page {
+  min-height: 100vh;
+  background: #ECEAE2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部导航 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48rpx;
+  height: 88rpx;
+  border-bottom: 1rpx solid #D5D0C8;
+  flex-shrink: 0;
+}
+
+.header-cancel {
+  font-size: 28rpx;
+  color: #A09A92;
+  min-width: 80rpx;
+}
+
+.header-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #3A3632;
+}
+
+.header-save {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #C8C4BC;
+  min-width: 80rpx;
+  text-align: right;
+  transition: color 0.2s;
+}
+
+.header-save.active {
+  color: #8BA676;
+}
+
+/* 编辑区域 */
+.edit-area {
+  flex: 1;
+  padding: 48rpx;
+}
+
+.edit-input {
+  width: 100%;
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #3A3632;
+  min-height: 400rpx;
+  background: transparent;
+}
+
+.edit-placeholder {
+  font-size: 30rpx;
+  color: #C8C4BC;
+}
+
+/* 元信息 */
+.meta-info {
+  padding: 24rpx 48rpx;
+  border-top: 1rpx solid #D5D0C8;
+  flex-shrink: 0;
+}
+
+.meta-text {
+  font-size: 24rpx;
+  color: #A09A92;
+  line-height: 1.6;
+}

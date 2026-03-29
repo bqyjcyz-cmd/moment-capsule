@@ -1,0 +1,191 @@
+.page {
+  width: 100%;
+  height: 100vh;
+  background: #ECEAE2;
+}
+
+.swiper { width: 100%; height: 100%; }
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 280rpx 112rpx 400rpx;
+  gap: 112rpx;
+}
+
+.slide-permissions {
+  padding: 124rpx 48rpx 80rpx;
+  gap: 40rpx;
+  justify-content: flex-start;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64rpx;
+}
+
+/* 图标圆 */
+.icon-circle {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 110rpx;
+  border: 1rpx solid #D5D0C8;
+  background: #F6F4EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-img { width: 96rpx; height: 96rpx; }
+
+.slide-title {
+  font-size: 52rpx;
+  font-weight: 300;
+  color: #3A3632;
+  letter-spacing: -1rpx;
+}
+
+.slide-desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.desc-line {
+  font-size: 30rpx;
+  color: #6B6560;
+  text-align: center;
+}
+
+/* 底部区域 */
+.slide-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+  width: 100%;
+}
+
+.ob-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: #8BA676;
+}
+
+.ob-btn-text {
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 指示器圆点 */
+.dots {
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 7rpx;
+  background: #D5D0C8;
+}
+
+.dot-active {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 9rpx;
+  background: #8BA676;
+}
+
+/* 权限页 */
+.perm-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.perm-icon-circle {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 72rpx;
+  border: 1rpx solid #D5D0C8;
+  background: #F6F4EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perm-icon-img { width: 64rpx; height: 64rpx; }
+
+.perm-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #3A3632;
+  text-align: center;
+}
+
+.perm-subtitle {
+  font-size: 26rpx;
+  color: #6B6560;
+}
+
+/* 权限卡片 */
+.perm-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  width: 100%;
+}
+
+.perm-card {
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+  padding: 32rpx 36rpx;
+  border-radius: 32rpx;
+  background: #F6F4EE;
+  border: 1rpx solid #D5D0C8;
+}
+
+.perm-card-icon {
+  width: 40rpx;
+  height: 40rpx;
+  flex-shrink: 0;
+}
+
+.perm-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.perm-card-name { font-size: 28rpx; font-weight: 500; color: #3A3632; }
+.perm-card-desc { font-size: 24rpx; color: #A09A92; }
+
+.perm-card-btn {
+  padding: 12rpx 28rpx;
+  border-radius: 32rpx;
+  border: 1rpx solid #D5D0C8;
+  font-size: 24rpx;
+  color: #6B6560;
+  flex-shrink: 0;
+}
+
+.perm-card-btn.highlight { border-color: #8BA676; color: #8BA676; }
+.perm-card-btn.granted { background: rgba(139, 166, 118, 0.12); border-color: #8BA676; color: #8BA676; }
+.perm-card-btn.denied { color: #C47070; border-color: #C47070; }
+
+.skip-text { font-size: 22rpx; color: #A09A92; }

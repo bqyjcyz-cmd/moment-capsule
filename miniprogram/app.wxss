@@ -1,0 +1,116 @@
+/* 此刻胶囊 — 全局样式 */
+/* 设计系统：Grid Notebook（格子手帐） */
+
+page {
+  /* 手帐色系 — 纸质感 */
+  --color-primary: #8BA676;
+  --color-primary-light: #A8C090;
+  --color-primary-bg: rgba(139, 166, 118, 0.12);
+  --color-bg: #ECEAE2;
+  --color-surface: #F6F4EE;
+  --color-surface-warm: #F0EDE5;
+  --color-text-primary: #3A3632;
+  --color-text-secondary: #6B6560;
+  --color-text-muted: #A09A92;
+  --color-text-placeholder: #C5BFB6;
+  --color-border: #D5D0C8;
+  --color-grid: #D8D4CB;
+  --color-immersive-bg: #1A1918;
+  --color-error: #C47070;
+
+  /* 情绪色板 — 柔和马卡龙 */
+  --mood-happy: #F2C94C;
+  --mood-calm: #8BA676;
+  --mood-sad: #8EA4BF;
+  --mood-angry: #D47B7B;
+  --mood-excited: #E8A065;
+  --mood-anxious: #C09DD0;
+
+  --radius-card: 4px;
+  --radius-button: 24px;
+  --radius-circle: 50%;
+  --radius-photo: 6px;
+
+  --shadow-card: none;
+  --shadow-float: 0 4rpx 20rpx rgba(0,0,0,0.06);
+
+  background-color: var(--color-bg);
+  font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  color: var(--color-text-primary);
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* 格子纸背景 */
+.grid-bg {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--color-grid) 1rpx, transparent 1rpx),
+    linear-gradient(90deg, var(--color-grid) 1rpx, transparent 1rpx);
+  background-size: 48rpx 48rpx;
+}
+
+/* 主按钮 — 简约线条风 */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border-radius: 48rpx;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 30rpx;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  border: none;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-primary[disabled] {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* 线框按钮 */
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border-radius: 48rpx;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 30rpx;
+  border: 2rpx solid var(--color-border);
+}
+
+/* 绿色标签（如"开心"、月份） */
+.tag-green {
+  display: inline-flex;
+  padding: 4rpx 16rpx;
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  font-size: 24rpx;
+  font-weight: 500;
+  border-radius: 4rpx;
+}
+
+/* 细线容器（手帐卡片） */
+.card-notebook {
+  border: 1rpx solid var(--color-border);
+  background: var(--color-surface);
+  padding: 32rpx;
+}
+
+/* 状态栏占位 */
+.status-bar {
+  height: var(--status-bar-height, 44px);
+}
+
+/* 安全区域底部 */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}

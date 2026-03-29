@@ -1,0 +1,102 @@
+<view class="page">
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+
+  <!-- 标题行 -->
+  <view class="title-row">
+    <text class="title">时间线</text>
+    <view class="year-display">
+      <text class="year-text">{{currentYear}}</text>
+      <text class="year-dot">·</text>
+      <text class="month-label">{{filterMonthLabel}}</text>
+    </view>
+  </view>
+
+  <!-- 月份选择器 -->
+  <scroll-view class="month-selector" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="month-inner">
+      <view
+        class="month-pill {{filterMonth === index + 1 ? 'month-pill-active' : ''}}"
+        wx:for="{{12}}"
+        wx:key="index"
+        data-month="{{index + 1}}"
+        bindtap="onMonthTap"
+      >
+        <text class="month-pill-text {{filterMonth === index + 1 ? 'month-pill-text-active' : ''}}">{{index + 1}}月</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 时间线列表 -->
+  <scroll-view class="timeline-scroll" scroll-y wx:if="{{!isEmpty && !isLoading}}">
+    <view class="timeline-list">
+      <block wx:for="{{groupedCapsules}}" wx:key="monthKey">
+        <!-- 月份头 -->
+        <view class="month-head">
+          <view class="month-dot" style="background:{{index === 0 ? '#8BA676' : '#C8B8A0'}};"></view>
+          <text class="month-head-text" style="color:{{index === 0 ? '#8BA676' : '#C8B8A0'}};">{{item.monthKey}}</text>
+          <view class="month-line"></view>
+        </view>
+
+        <!-- 时间线条目 -->
+        <view class="timeline-row" wx:for="{{item.items}}" wx:for-item="capsule" wx:key="_id">
+          <!-- 时间线轴 -->
+          <view class="tl-axis">
+            <view class="tl-line"></view>
+            <view class="tl-dot" style="border-color:{{capsule.isRecent ? '#8BA676' : '#C8B8A0'}};"></view>
+            <view class="tl-line tl-line-bottom"></view>
+          </view>
+          <!-- 卡片区 -->
+          <view class="tl-card-wrap" data-id="{{capsule._id}}" bindtap="onCardTap">
+            <text class="tl-date-label" style="color:{{capsule.isRecent ? '#8BA676' : '#A09A92'}};">{{capsule.dateLabel}}</text>
+            <view class="tl-card">
+              <image
+                wx:if="{{capsule.coverPhoto}}"
+                src="{{capsule.coverPhoto}}"
+                mode="aspectFill"
+                class="tl-card-photo"
+              />
+              <view class="tl-card-content">
+                <text class="tl-card-text">{{capsule.textPreview || ''}}</text>
+                <text class="tl-card-meta">{{capsule.locationName}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <!-- 淡出结尾 -->
+      <view class="fade-end" wx:if="{{groupedCapsules.length > 0}}">
+        <view class="tl-axis">
+          <view class="tl-line" style="height:16rpx;"></view>
+          <view class="fade-dots">
+            <view class="fade-dot" style="width:10rpx;height:10rpx;"></view>
+            <view class="fade-dot" style="width:8rpx;height:8rpx;"></view>
+            <view class="fade-dot" style="width:6rpx;height:6rpx;"></view>
+          </view>
+        </view>
+        <text class="fade-text">更久以前...</text>
+      </view>
+    </view>
+
+    <view style="height: 200rpx;"></view>
+  </scroll-view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty && !isLoading}}">
+    <view class="empty-icon-wrap">
+      <image class="empty-icon-img" src="/images/empty-package.svg" />
+    </view>
+    <text class="empty-text">你的时间线还是空的</text>
+  </view>
+
+  <!-- 骨架屏 -->
+  <view class="skeleton" wx:if="{{isLoading}}">
+    <view class="skeleton-card" wx:for="{{3}}" wx:key="index">
+      <view class="skeleton-photo pulse"></view>
+      <view class="skeleton-content">
+        <view class="skeleton-line skeleton-line-long pulse"></view>
+        <view class="skeleton-line skeleton-line-short pulse"></view>
+      </view>
+    </view>
+  </view>
+</view>
