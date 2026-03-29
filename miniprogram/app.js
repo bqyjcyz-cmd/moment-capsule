@@ -4,7 +4,10 @@ App({
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
       return
     }
-    wx.cloud.init({ traceUser: true })
+    wx.cloud.init({
+      env: 'cloudbase-2gko7z753975d4ba',
+      traceUser: true
+    })
     this.globalData = {}
 
     // 启动时尝试同步未上传的胶囊
