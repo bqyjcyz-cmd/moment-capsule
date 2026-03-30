@@ -47,7 +47,6 @@
     }
   },
   "requiredPrivateInfos": [
-    "getLocation",
     "chooseLocation"
   ],
   "__usePrivacyCheck__": true

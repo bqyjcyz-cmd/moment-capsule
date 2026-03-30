@@ -56,11 +56,6 @@
     </view>
   </view>
 
-  <!-- 定位按钮 -->
-  <view class="locate-btn" bindtap="onLocateTap">
-    <image class="locate-icon" src="/images/map-locate.svg" />
-  </view>
-
   <!-- 预览卡片 -->
   <view class="preview-card {{showPreview ? 'show' : ''}}" wx:if="{{previewCapsule}}" bindtap="onPreviewTap">
     <view class="preview-photo">

@@ -1,4 +1,4 @@
-const { getLocation, checkLocationAuth, requestLocationAuth } = require('../../utils/location')
+const { checkLocationAuth, requestLocationAuth } = require('../../utils/location')
 const { saveCapsule } = require('../../utils/storage')
 const { formatDate } = require('../../utils/date')
 

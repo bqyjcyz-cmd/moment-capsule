@@ -1,4 +1,4 @@
-const { getLocation, checkLocationAuth } = require('../../utils/location')
+const { checkLocationAuth } = require('../../utils/location')
 const { formatRelativeDate, formatDate } = require('../../utils/date')
 const { getCapsules, getTodayInHistory } = require('../../utils/storage')
 
@@ -73,23 +73,7 @@ Page({
     this.markerMap = markerMap
     this.setData({ markers, isEmpty: capsules.length === 0 })
 
-    this.locateUser()
     this.checkTodayHistory()
-  },
-
-  async locateUser() {
-    const authStatus = await checkLocationAuth()
-    if (authStatus !== 'authorized') return
-    try {
-      const { latitude, longitude } = await getLocation()
-      this.setData({ latitude, longitude })
-    } catch (err) {
-      console.error('定位失败', err)
-    }
-  },
-
-  onLocateTap() {
-    this.locateUser()
   },
 
   async checkTodayHistory() {
